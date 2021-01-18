@@ -149,7 +149,7 @@ class _MyAppState extends State<MyApp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         new Text(
-                          'Select correct answers from below:',
+                          'Answer all questions',
                           style: new TextStyle(
                               fontSize: 20.0, fontWeight: FontWeight.bold),
                         ),

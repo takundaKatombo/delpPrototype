@@ -9,6 +9,13 @@ class Course extends StatefulWidget {
 }
 
 class _CourseState extends State<Course> {
+  int _selectedNotes;
+  int _selectedPractiseQsn;
+  int _selectedAss;
+  int _selectedExercise;
+  int _selectedQuiz;
+  int _selectedPractiseQsnChapter;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -57,7 +64,9 @@ class _CourseState extends State<Course> {
                       Tab(
                         child: Text(
                           'Exercises',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                       Tab(
@@ -84,29 +93,62 @@ class _CourseState extends State<Course> {
                     width: MediaQuery.of(context).size.width * 0.2,
                     child: Column(
                       children: [
-                        Text(
-                          'Contents',
-                          style: TextStyle(color: Colors.black, fontSize: 24),
-                        ),
                         ListTile(
-                          selectedTileColor: Colors.yellow[50],
-                          selected: true,
-                          title: Text(
-                            'Chapter 1',
-                            style: TextStyle(
-                              color: Colors.black,
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedNotes == 1,
+                            title: Text(
+                              'Chapter 1',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                        ),
+                            onTap: () {
+                              setState(() {
+                                _selectedNotes = 1;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Chapter 2'),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedNotes == 2,
+                            title: Text(
+                              'Chapter 2',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedNotes = 2;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Chapter 3'),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedNotes == 3,
+                            title: Text(
+                              'Chapter 3',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedNotes = 3;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Chapter 4'),
-                        )
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedNotes == 4,
+                            title: Text(
+                              'Chapter 4',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedNotes = 4;
+                              });
+                            })
                       ],
                     ),
                   ),
@@ -166,24 +208,61 @@ class _CourseState extends State<Course> {
 
                           children: [
                             ListTile(
-                              // selectedTileColor: Colors.yellow[50],
-                              // selected: true,
-                              title: Text(
-                                'Chapter 1',
-                                style: TextStyle(
-                                  color: Colors.black,
+                                selectedTileColor: Colors.yellow[50],
+                                selected: _selectedPractiseQsnChapter == 1,
+                                title: Text(
+                                  'Chapter 1',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                            ),
+                                onTap: () {
+                                  setState(() {
+                                    _selectedPractiseQsnChapter = 1;
+                                  });
+                                }),
                             ListTile(
-                              title: Text('Chapter 2'),
-                            ),
+                                selectedTileColor: Colors.yellow[50],
+                                selected: _selectedPractiseQsnChapter == 2,
+                                title: Text(
+                                  'Chapter 2',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    _selectedPractiseQsnChapter = 2;
+                                  });
+                                }),
                             ListTile(
-                              title: Text('Chapter 3'),
-                            ),
+                                selectedTileColor: Colors.yellow[50],
+                                selected: _selectedPractiseQsnChapter == 3,
+                                title: Text(
+                                  'Chapter 3',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    _selectedPractiseQsnChapter = 3;
+                                  });
+                                }),
                             ListTile(
-                              title: Text('Chapter 4'),
-                            )
+                                selectedTileColor: Colors.yellow[50],
+                                selected: _selectedPractiseQsnChapter == 4,
+                                title: Text(
+                                  'Chapter 4',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    _selectedPractiseQsnChapter = 4;
+                                  });
+                                })
                           ],
                           title: Text(
                             'Objective wise ',
@@ -191,14 +270,47 @@ class _CourseState extends State<Course> {
                           ),
                         ),
                         ListTile(
-                          title: Text('Easy'),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedPractiseQsn == 1,
+                            title: Text(
+                              'Easy',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedPractiseQsn = 1;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Tough'),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedPractiseQsn == 2,
+                            title: Text(
+                              'Tough',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedPractiseQsn = 2;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Very Tough'),
-                        )
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedPractiseQsn == 3,
+                            title: Text(
+                              'Very Tough',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedPractiseQsn = 3;
+                              });
+                            }),
                       ],
                     ),
                   ),
@@ -248,22 +360,61 @@ class _CourseState extends State<Course> {
                     child: Column(
                       children: [
                         ListTile(
-                          selectedTileColor: Colors.yellow[50],
-                          selected: true,
-                          title: Text(
-                            'Submission Pending',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedAss == 1,
+                            title: Text(
+                              'Submission Pending',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedAss = 1;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Done'),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedAss == 2,
+                            title: Text(
+                              'Done',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedAss = 2;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Assessed'),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedAss == 3,
+                            title: Text(
+                              'Assessed',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedAss = 3;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Due'),
-                        )
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedAss == 4,
+                            title: Text(
+                              'Due',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedAss = 4;
+                              });
+                            })
                       ],
                     ),
                   ),
@@ -313,19 +464,47 @@ class _CourseState extends State<Course> {
                     child: Column(
                       children: [
                         ListTile(
-                          selectedTileColor: Colors.yellow[50],
-                          selected: true,
-                          title: Text(
-                            'Submission Pending',
-                            style: TextStyle(color: Colors.black),
-                          ),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedExercise == 2,
+                            title: Text(
+                              'Submission Pending',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedExercise = 2;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Done'),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedExercise == 3,
+                            title: Text(
+                              'Assessed',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedExercise = 3;
+                              });
+                            }),
                         ListTile(
-                          title: Text('Assessed'),
-                        ),
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedExercise == 4,
+                            title: Text(
+                              'Done',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedExercise = 4;
+                              });
+                            })
                       ],
                     ),
                   ),
@@ -368,10 +547,82 @@ class _CourseState extends State<Course> {
                   ),
                 ],
               ),
-              Container(
-                child: Center(
-                  child: Text('Quiz'),
-                ),
+              Row(
+                children: [
+                  Container(
+                    color: Colors.black54,
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    child: Column(
+                      children: [
+                        ListTile(
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedExercise == 2,
+                            title: Text(
+                              'Submission Pending',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedExercise = 2;
+                              });
+                            }),
+                        ListTile(
+                            selectedTileColor: Colors.yellow[50],
+                            selected: _selectedExercise == 4,
+                            title: Text(
+                              'Done',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _selectedExercise = 4;
+                              });
+                            })
+                      ],
+                    ),
+                  ),
+                  // Spacer(),
+                  Divider(),
+                  Container(
+                    color: Colors.yellow[50],
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Column(
+                      children: [
+                        ListTile(
+                          tileColor: Colors.yellow[50],
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Exercise()),
+                            );
+                          },
+                          title: Text('Chapter 1'),
+                        ),
+                        Divider(),
+                        ListTile(
+                          tileColor: Colors.yellow[50],
+                          title: Text('Chapter 2'),
+                        ),
+                        Divider(),
+                        ListTile(
+                          tileColor: Colors.yellow[50],
+                          title: Text('Chapter 3'),
+                        ),
+                        Divider(),
+                        ListTile(
+                          tileColor: Colors.yellow[50],
+                          title: Text('Chapter 4'),
+                        ),
+                        Divider(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ],
           )),
