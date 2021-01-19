@@ -152,6 +152,12 @@ class _CourseState extends State<Course> {
                       ],
                     ),
                   ),
+                  Divider(),
+                  Container(
+                    color: Colors.yellow[50],
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: _switchLeftPanelNotes(_selectedNotes),
+                  ),
                   // Spacer(),
                   // Divider(),
                   // Container(
@@ -314,41 +320,11 @@ class _CourseState extends State<Course> {
                       ],
                     ),
                   ),
-                  // Spacer(),
                   Divider(),
                   Container(
                     color: Colors.yellow[50],
                     width: MediaQuery.of(context).size.width * 0.8,
-                    // child: Column(
-                    //   children: [
-                    //     ExpansionTile(
-                    //       //tileColor: Colors.yellow[50],
-                    //       // onTap: () {
-                    //       //   Navigator.push(
-                    //       //     context,
-                    //       //     MaterialPageRoute(builder: (context) => MyApp()),
-                    //       //   );
-                    //       // },
-                    //       title: Text('Objective wise '),
-                    //     ),
-                    //     Divider(),
-                    //     ListTile(
-                    //       tileColor: Colors.yellow[50],
-                    //       title: Text('Assignment 2'),
-                    //     ),
-                    //     Divider(),
-                    //     ListTile(
-                    //       tileColor: Colors.yellow[50],
-                    //       title: Text('Assignment 3'),
-                    //     ),
-                    //     Divider(),
-                    //     ListTile(
-                    //       tileColor: Colors.yellow[50],
-                    //       title: Text('Assignment 4'),
-                    //     ),
-                    //     Divider(),
-                    //   ],
-                    // ),
+                    child: _switchLeftPanelPracticeQsn(_selectedPractiseQsn),
                   ),
                 ],
               ),
@@ -423,36 +399,7 @@ class _CourseState extends State<Course> {
                   Container(
                     color: Colors.yellow[50],
                     width: MediaQuery.of(context).size.width * 0.8,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => MyApp()),
-                            );
-                          },
-                          title: Text('Assignment 1'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Assignment 2'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Assignment 3'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Assignment 4'),
-                        ),
-                        Divider(),
-                      ],
-                    ),
+                    child: _switchLeftPanelAss(_selectedAss),
                   ),
                 ],
               ),
@@ -513,37 +460,7 @@ class _CourseState extends State<Course> {
                   Container(
                     color: Colors.yellow[50],
                     width: MediaQuery.of(context).size.width * 0.8,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Exercise()),
-                            );
-                          },
-                          title: Text('Exercise 1'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Exercise 2'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Exercise 3'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Exercise 4'),
-                        ),
-                        Divider(),
-                      ],
-                    ),
+                    child: _switchLeftPanelExercise(_selectedExercise),
                   ),
                 ],
               ),
@@ -590,42 +507,267 @@ class _CourseState extends State<Course> {
                   Container(
                     color: Colors.yellow[50],
                     width: MediaQuery.of(context).size.width * 0.8,
-                    child: Column(
-                      children: [
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Exercise()),
-                            );
-                          },
-                          title: Text('Chapter 1'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Chapter 2'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Chapter 3'),
-                        ),
-                        Divider(),
-                        ListTile(
-                          tileColor: Colors.yellow[50],
-                          title: Text('Chapter 4'),
-                        ),
-                        Divider(),
-                      ],
-                    ),
+                    child: _switchLeftPanelQuiz(_selectedQuiz),
                   ),
                 ],
               ),
             ],
           )),
     );
+  }
+
+  Widget _switchLeftPanelAss(int selectedAss) {
+    switch (selectedAss) {
+      case 1:
+        return Column(
+          children: [
+            ListTile(
+              tileColor: Colors.yellow[50],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyApp()),
+                );
+              },
+              title: Text('Assignment 1'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Assignment 2'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Assignment 3'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Assignment 4'),
+            ),
+            Divider(),
+          ],
+        );
+      case 2:
+        return Container(
+          child: Center(
+            child: Text("Done Assignments"),
+          ),
+        );
+      case 3:
+        return Container(
+          child: Center(
+            child: Text("Assessed Assignments"),
+          ),
+        );
+        break;
+      default:
+        return Container(
+          child: Center(
+            child: Text("Due Assignments"),
+          ),
+        );
+    }
+  }
+
+  Widget _switchLeftPanelNotes(int selectedNotes) {
+    switch (selectedNotes) {
+      case 1:
+        return Container(
+          child: Center(
+            child: Text("Chapter 1"),
+          ),
+        );
+      case 2:
+        return Container(
+          child: Center(
+            child: Text("Chapter 2"),
+          ),
+        );
+      case 3:
+        return Container(
+          child: Center(
+            child: Text("Chapter 3"),
+          ),
+        );
+        break;
+      default:
+        return Container(
+          child: Center(
+            child: Text("Chapter 4"),
+          ),
+        );
+    }
+  }
+
+  Widget _switchLeftPanelPracticeQsn(int selectedPracticeQsn) {
+    switch (selectedPracticeQsn) {
+      case 1:
+        return Container(
+          child: Center(
+            child: Text("Easy Mock Test"),
+          ),
+        );
+      // return Column(
+      //   children: [
+      //     ListTile(
+      //       tileColor: Colors.yellow[50],
+      //       onTap: () {
+      //         Navigator.push(
+      //           context,
+      //           MaterialPageRoute(builder: (context) => MyApp()),
+      //         );
+      //       },
+      //       title: Text('Chapter 1'),
+      //     ),
+      //     Divider(),
+      //     ListTile(
+      //       tileColor: Colors.yellow[50],
+      //       title: Text('Chapter 2'),
+      //     ),
+      //     Divider(),
+      //     ListTile(
+      //       tileColor: Colors.yellow[50],
+      //       title: Text('Chapter 3'),
+      //     ),
+      //     Divider(),
+      //     ListTile(
+      //       tileColor: Colors.yellow[50],
+      //       title: Text('Chapter 4'),
+      //     ),
+      //     Divider(),
+      //   ],
+      // );
+      case 2:
+        return Container(
+          child: Center(
+            child: Text("Tough Mock Test"),
+          ),
+        );
+      case 3:
+        return Container(
+          child: Center(
+            child: Text(" Very Tough Mock Test"),
+          ),
+        );
+        break;
+      default:
+        return Container(
+          child: Center(
+            child: Text(" Mock Test"),
+          ),
+        );
+    }
+  }
+
+  Widget _switchLeftPanelExercise(int selectedExercise) {
+    switch (selectedExercise) {
+      case 1:
+        return Column(
+          children: [
+            ListTile(
+              tileColor: Colors.yellow[50],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyApp()),
+                );
+              },
+              title: Text('Exercise 1'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Exercise 2'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Exercise 3'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Exercise 4'),
+            ),
+            Divider(),
+          ],
+        );
+      case 3:
+        return Container(
+          child: Center(
+            child: Text("Done Exercise"),
+          ),
+        );
+      case 2:
+        return Container(
+          child: Center(
+            child: Text("Assessed Exercise"),
+          ),
+        );
+        break;
+      default:
+        return Container(
+          child: Center(
+            child: Text("Exercise"),
+          ),
+        );
+    }
+  }
+
+  Widget _switchLeftPanelQuiz(int selectedQuiz) {
+    switch (selectedQuiz) {
+      case 1:
+        return Column(
+          children: [
+            ListTile(
+              tileColor: Colors.yellow[50],
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyApp()),
+                );
+              },
+              title: Text('Assignment 1'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Assignment 2'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Assignment 3'),
+            ),
+            Divider(),
+            ListTile(
+              tileColor: Colors.yellow[50],
+              title: Text('Assignment 4'),
+            ),
+            Divider(),
+          ],
+        );
+      case 2:
+        return Container(
+          child: Center(
+            child: Text("Done Assignments"),
+          ),
+        );
+      case 3:
+        return Container(
+          child: Center(
+            child: Text("Assessed Assignments"),
+          ),
+        );
+        break;
+      default:
+        return Container(
+          child: Center(
+            child: Text("Due Assignments"),
+          ),
+        );
+    }
   }
 }
