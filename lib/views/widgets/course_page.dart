@@ -15,7 +15,7 @@ class _CourseState extends State<Course> {
   int _selectedAss;
   int _selectedExercise;
   int _selectedQuiz;
-  int _selectedPractiseQsnChapter;
+  // int _selectedPractiseQsnChapter;
 
   @override
   Widget build(BuildContext context) {

@@ -995,6 +995,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           ListTile(
                             title: Text('Todo item 8'),
+                          ),
+                          FloatingActionButton(
+                            onPressed: () {},
+                            child: Icon(Icons.add),
                           )
                         ],
                       ),
