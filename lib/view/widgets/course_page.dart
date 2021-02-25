@@ -1,8 +1,11 @@
 import 'package:delp/main.dart';
-import 'package:delp/views/pages/assignment.dart';
-import 'package:delp/views/pages/exercise.dart';
+import 'package:delp/model/appStateModel.dart';
+import 'package:delp/view/pages/assignment.dart';
+import 'package:delp/view/pages/exercise.dart';
+import 'package:delp/view/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Course extends StatefulWidget {
   @override
@@ -19,7 +22,10 @@ class _CourseState extends State<Course> {
 
   @override
   Widget build(BuildContext context) {
+    var appState = Provider.of<AppState>(context);
+
     return DefaultTabController(
+      initialIndex: appState.tabsInitPosition,
       length: 6,
       child: Scaffold(
           appBar: AppBar(
@@ -29,7 +35,7 @@ class _CourseState extends State<Course> {
             // centerTitle: true,
             //leading: Icon(Icons.person_outline),
             title: Text(
-              'Coursename',
+              appState.registeredCourses[appState.selectedCourse].name,
               style: TextStyle(color: Colors.black),
             ),
             bottom: PreferredSize(
