@@ -1,5 +1,7 @@
+import 'package:delp/model/loginModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -13,35 +15,39 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    // var loginModel = Provider.of<LoginModel>(context);
+
     return Scaffold(
       body: Center(
-        child: Column(children: [
-          Container(height: 50),
-          Container(
-              width: MediaQuery.of(context).size.width * 0.4,
-              height: MediaQuery.of(context).size.height * 0.1,
-              child: TextField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                    hintText: 'Username', labelText: 'Username'),
-              )),
-          Container(
-              width: MediaQuery.of(context).size.width * 0.4,
-              height: MediaQuery.of(context).size.height * 0.1,
-              child: TextField(
-                controller: passwordController,
-                decoration: const InputDecoration(
-                    hintText: 'Password', labelText: 'Password'),
-              )),
-          ElevatedButton(
-            //comment
-            onPressed: () {
-              Navigator.pushNamed(
-                  context, '/home'); //todo: implement login logic
-            },
-            child: Text('Login'),
-          ),
-        ]),
+        child: Form(
+          child: Column(children: [
+            Container(height: 50),
+            Container(
+                width: MediaQuery.of(context).size.width * 0.4,
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: TextField(
+                  controller: usernameController,
+                  decoration: const InputDecoration(
+                      hintText: 'Username', labelText: 'Username'),
+                )),
+            Container(
+                width: MediaQuery.of(context).size.width * 0.4,
+                height: MediaQuery.of(context).size.height * 0.1,
+                child: TextField(
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                      hintText: 'Password', labelText: 'Password'),
+                )),
+            ElevatedButton(
+              //comment
+              onPressed: () {
+                Navigator.pushNamed(
+                    context, '/home'); //todo: implement login logic
+              },
+              child: Text('Login'),
+            ),
+          ]),
+        ),
       ),
     );
   }

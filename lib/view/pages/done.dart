@@ -3,12 +3,12 @@ import 'package:delp/model/courses.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Assignment extends StatefulWidget {
+class Submitted extends StatefulWidget {
   @override
-  _AssignmentState createState() => new _AssignmentState();
+  _SubmittedState createState() => new _SubmittedState();
 }
 
-class _AssignmentState extends State<Assignment> {
+class _SubmittedState extends State<Submitted> {
   int _radioValue1 = -1;
   int correctScore = 0;
   int _radioValue2 = -1;
@@ -254,12 +254,11 @@ class _AssignmentState extends State<Assignment> {
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width * 0.7,
           child: ListView.builder(
-            itemCount: appState
-                .registeredCourses[appState.selectedCourse].assignments.length,
+            itemCount: appState.submitted.length,
             itemBuilder: (context, index) {
-              final qsn = appState.registeredCourses[appState.selectedCourse]
-                  .assignments[index];
+              final qsn = appState.submitted[index];
               if (qsn.type == 'FW') {
+                var answerController = TextEditingController();
                 return Container(
                   height: MediaQuery.of(context).size.height * 0.4,
                   width: MediaQuery.of(context).size.width * 0.6,
@@ -272,18 +271,17 @@ class _AssignmentState extends State<Assignment> {
                             child: Padding(
                                 padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
                                 child: TextField(
+                                  readOnly: true,
+                                  controller: answerController,
                                   maxLines: 8,
-                                  onChanged: (val) {
-                                    qsn.answerFreeWritten = val;
-                                    done.add(qsn);
-                                  },
+                                  onChanged: (val) {},
                                   style: TextStyle(
                                     fontSize: 14,
                                   ),
                                   keyboardType: TextInputType.multiline,
                                   decoration: InputDecoration(
                                     border: OutlineInputBorder(),
-                                    hintText: '',
+                                    hintText: qsn.answerFreeWritten,
                                   ),
                                 ))),
                         Padding(
@@ -304,7 +302,10 @@ class _AssignmentState extends State<Assignment> {
                               ),
                               Spacer(),
                               ElevatedButton.icon(
-                                onPressed: () {},
+                                onPressed: () {
+                                  qsn.answerFreeWritten = answerController.text;
+                                  done.add(qsn);
+                                },
                                 icon: Icon(Icons.skip_next),
                                 label: Text("Next Question"),
                               ),

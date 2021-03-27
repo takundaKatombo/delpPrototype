@@ -26,6 +26,8 @@ class Question {
   String status = "";
   String type = "";
   String question = "";
+  String answerFreeWritten = "";
+  Map<String, String> answerMultipleChoice;
   List<Map<String, String>> answersMultipleChoice = [];
   @override
   String toString() {
@@ -36,7 +38,7 @@ class Question {
     print("type");
     print(question);
     print("question");
-    // print(answersMultipleChoice);
+    print(answersMultipleChoice.toString());
 
     return super.toString();
   }

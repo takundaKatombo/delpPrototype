@@ -1,6 +1,7 @@
 import 'package:delp/main.dart';
 import 'package:delp/model/appStateModel.dart';
 import 'package:delp/view/pages/assignment.dart';
+import 'package:delp/view/pages/done.dart';
 import 'package:delp/view/pages/exercise.dart';
 import 'package:delp/view/pages/home.dart';
 import 'package:flutter/cupertino.dart';
@@ -91,120 +92,120 @@ class _CourseState extends State<Course> {
             //   ),
             // ],
           ),
-          drawer: Drawer(
-            elevation: 30,
-            child: Container(
-              color: Colors.yellow[50],
-              child: Column(
-                children: [
-                  ListTile(
-                    tileColor: Colors.black54,
-                    title: Text(
-                      'Home',
-                      style: TextStyle(color: Colors.yellow[50]),
-                    ),
-                    trailing: Icon(Icons.home, color: Colors.yellow[50]),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MyHomePage()),
-                      );
-                    },
-                  ),
-                  // Divider(),
-                  ListTile(
-                      tileColor: Colors.black54,
-                      title: Text(
-                        'Coursework',
-                        style: TextStyle(color: Colors.yellow[50]),
-                      ),
-                      trailing:
-                          Icon(Icons.assessment, color: Colors.yellow[50])),
-                  ListTile(
-                    tileColor: Colors.black54,
-                    title: Text(
-                      'Calender',
-                      style: TextStyle(color: Colors.yellow[50]),
-                    ),
-                    trailing:
-                        Icon(Icons.calendar_today, color: Colors.yellow[50]),
-                  ),
-                  Container(
-                    color: Colors.black54,
-                    child: ExpansionTile(
-                      backgroundColor: Colors.black54,
-                      title: Text(
-                        'My Courses',
-                        style: TextStyle(color: Colors.yellow[50]),
-                      ),
-                      children: [
-                        ListTile(
-                          tileColor: Colors.black54,
-                          title: Text(
-                            'Geography',
-                            style: TextStyle(color: Colors.yellow[50]),
-                          ),
-                          trailing:
-                              Icon(Icons.view_module, color: Colors.yellow[50]),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Course()),
-                            );
-                          },
-                        ),
-                        ListTile(
-                          tileColor: Colors.black54,
-                          title: Text(
-                            'Maths',
-                            style: TextStyle(color: Colors.yellow[50]),
-                          ),
-                          trailing:
-                              Icon(Icons.view_module, color: Colors.yellow[50]),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Course()),
-                            );
-                          },
-                        ),
-                        ListTile(
-                          tileColor: Colors.black54,
-                          title: Text(
-                            'English',
-                            style: TextStyle(color: Colors.yellow[50]),
-                          ),
-                          trailing:
-                              Icon(Icons.view_module, color: Colors.yellow[50]),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Course()),
-                            );
-                          },
-                        ),
-                        ListTile(
-                          tileColor: Colors.black54,
-                          title: Text(
-                            'Accounts',
-                            style: TextStyle(color: Colors.yellow[50]),
-                          ),
-                          trailing:
-                              Icon(Icons.view_module, color: Colors.yellow[50]),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Course()),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // drawer: Drawer(
+          //   elevation: 30,
+          //   child: Container(
+          //     color: Colors.yellow[50],
+          //     child: Column(
+          //       children: [
+          //         ListTile(
+          //           tileColor: Colors.black54,
+          //           title: Text(
+          //             'Home',
+          //             style: TextStyle(color: Colors.yellow[50]),
+          //           ),
+          //           trailing: Icon(Icons.home, color: Colors.yellow[50]),
+          //           onTap: () {
+          //             Navigator.push(
+          //               context,
+          //               MaterialPageRoute(builder: (context) => MyHomePage()),
+          //             );
+          //           },
+          //         ),
+          //         // Divider(),
+          //         ListTile(
+          //             tileColor: Colors.black54,
+          //             title: Text(
+          //               'Coursework',
+          //               style: TextStyle(color: Colors.yellow[50]),
+          //             ),
+          //             trailing:
+          //                 Icon(Icons.assessment, color: Colors.yellow[50])),
+          //         ListTile(
+          //           tileColor: Colors.black54,
+          //           title: Text(
+          //             'Calender',
+          //             style: TextStyle(color: Colors.yellow[50]),
+          //           ),
+          //           trailing:
+          //               Icon(Icons.calendar_today, color: Colors.yellow[50]),
+          //         ),
+          //         Container(
+          //           color: Colors.black54,
+          //           child: ExpansionTile(
+          //             backgroundColor: Colors.black54,
+          //             title: Text(
+          //               'My Courses',
+          //               style: TextStyle(color: Colors.yellow[50]),
+          //             ),
+          //             children: [
+          //               ListTile(
+          //                 tileColor: Colors.black54,
+          //                 title: Text(
+          //                   'Geography',
+          //                   style: TextStyle(color: Colors.yellow[50]),
+          //                 ),
+          //                 trailing:
+          //                     Icon(Icons.view_module, color: Colors.yellow[50]),
+          //                 onTap: () {
+          //                   Navigator.push(
+          //                     context,
+          //                     MaterialPageRoute(builder: (context) => Course()),
+          //                   );
+          //                 },
+          //               ),
+          //               ListTile(
+          //                 tileColor: Colors.black54,
+          //                 title: Text(
+          //                   'Maths',
+          //                   style: TextStyle(color: Colors.yellow[50]),
+          //                 ),
+          //                 trailing:
+          //                     Icon(Icons.view_module, color: Colors.yellow[50]),
+          //                 onTap: () {
+          //                   Navigator.push(
+          //                     context,
+          //                     MaterialPageRoute(builder: (context) => Course()),
+          //                   );
+          //                 },
+          //               ),
+          //               ListTile(
+          //                 tileColor: Colors.black54,
+          //                 title: Text(
+          //                   'English',
+          //                   style: TextStyle(color: Colors.yellow[50]),
+          //                 ),
+          //                 trailing:
+          //                     Icon(Icons.view_module, color: Colors.yellow[50]),
+          //                 onTap: () {
+          //                   Navigator.push(
+          //                     context,
+          //                     MaterialPageRoute(builder: (context) => Course()),
+          //                   );
+          //                 },
+          //               ),
+          //               ListTile(
+          //                 tileColor: Colors.black54,
+          //                 title: Text(
+          //                   'Accounts',
+          //                   style: TextStyle(color: Colors.yellow[50]),
+          //                 ),
+          //                 trailing:
+          //                     Icon(Icons.view_module, color: Colors.yellow[50]),
+          //                 onTap: () {
+          //                   Navigator.push(
+          //                     context,
+          //                     MaterialPageRoute(builder: (context) => Course()),
+          //                   );
+          //                 },
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           body: TabBarView(
             children: <Widget>[
               Row(
@@ -638,6 +639,8 @@ class _CourseState extends State<Course> {
   }
 
   Widget _switchLeftPanelAss(int selectedAss) {
+    var appState = Provider.of<AppState>(context);
+
     switch (selectedAss) {
       case 1:
         return Column(
@@ -671,11 +674,32 @@ class _CourseState extends State<Course> {
           ],
         );
       case 2:
-        return Container(
-          child: Center(
-            child: Text("Done Assignments"),
-          ),
-        );
+        return appState.submitted.isEmpty
+            ? Container(
+                child: Center(
+                  child: Text("Done Assignments"),
+                ),
+              )
+            : Column(
+                children: [
+                  ListTile(
+                    tileColor: Colors.yellow[50],
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Submitted()),
+                      );
+                    },
+                    title: Text('Assignment 1'),
+                  ),
+                  Divider(),
+                  ListTile(
+                    tileColor: Colors.yellow[50],
+                    title: Text('Assignment 2'),
+                  ),
+                  Divider(),
+                ],
+              );
       case 3:
         return Container(
           child: Center(
@@ -830,10 +854,10 @@ class _CourseState extends State<Course> {
             ListTile(
               tileColor: Colors.yellow[50],
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Exercise()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => Exercise()),
+                // );
               },
               title: Text('Exercise 1'),
             ),

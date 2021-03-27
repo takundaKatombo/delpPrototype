@@ -1,317 +1,77 @@
-import 'package:delp/model/appStateModel.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:katex_flutter/katex_flutter.dart';
 
 class Exercise extends StatefulWidget {
+  Exercise({Key key}) : super(key: key);
+
   @override
-  _ExerciseState createState() => new _ExerciseState();
+  _ExerciseState createState() => _ExerciseState();
 }
 
 class _ExerciseState extends State<Exercise> {
-  int _radioValue1 = -1;
-  int correctScore = 0;
-  int _radioValue2 = -1;
-  int _radioValue3 = -1;
-  int _radioValue4 = -1;
-  int _radioValue5 = -1;
+  TextEditingController _laTeXInputController = TextEditingController(
+      text: r'What do you think about $L'
+          '\''
+          r' = {L}{\sqrt{1-\frac{v^2}{c^2}}}$ ?'
+          '\n'
+          r'And some display $\LaTeX$: $$\boxed{\rm{A function: } f(x) = \frac{5}{3} \cdot x}$$'
+          '\n'
+          r'$\KaTeX$-Flutter provides easy processing of $LaTeX$ embedded into any text.'
+          '\n'
+          r'This package was developped for testapp.schule education project. Find us on pub.dev/packages/katex_flutter !');
+  String _laTeX;
 
-  int _radioValue = -1;
-
-  void _handleRadioValueChange1(int value) {
-    setState(() {
-      _radioValue1 = value;
-
-      // switch (_radioValue1) {
-      //   case 0:
-      //     Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
-      //     correctScore++;
-      //     break;
-      //   case 1:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      //   case 2:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      // }
-    });
-  }
-
-  void _handleRadioValueChange2(int value) {
-    setState(() {
-      _radioValue2 = value;
-
-      // switch (_radioValue2) {
-      //   case 0:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      //   case 1:
-      //     Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
-      //     correctScore++;
-      //     break;
-      //   case 2:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      // }
-    });
-  }
-
-  void _handleRadioValueChange(int value) {
-    setState(() {
-      _radioValue = value;
-
-      // switch (_radioValue2) {
-      //   case 0:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      //   case 1:
-      //     Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
-      //     correctScore++;
-      //     break;
-      //   case 2:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      // }
-    });
-  }
-
-  void _handleRadioValueChange3(int value) {
-    setState(() {
-      _radioValue3 = value;
-
-      // switch (_radioValue3) {
-      //   case 0:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      //   case 1:
-      //     Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
-      //     correctScore++;
-      //     break;
-      //   case 2:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      // }
-    });
-  }
-
-  void _handleRadioValueChange4(int value) {
-    setState(() {
-      _radioValue4 = value;
-
-      // switch (_radioValue4) {
-      //   case 0:
-      //     Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
-      //     correctScore++;
-      //     break;
-      //   case 1:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      //   case 2:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      // }
-    });
-  }
-
-  void _handleRadioValueChange5(int value) {
-    setState(() {
-      _radioValue5 = value;
-
-      // switch (_radioValue5) {
-      //   case 0:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      //   case 1:
-      //     Fluttertoast.showToast(msg: 'Try again !',toastLength: Toast.LENGTH_SHORT);
-      //     break;
-      //   case 2:
-      //     Fluttertoast.showToast(msg: 'Correct !',toastLength: Toast.LENGTH_SHORT);
-      //     correctScore++;
-      //     break;
-      // }
-    });
+  @override
+  void initState() {
+    _renderLaTeX();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    var appState = Provider.of<AppState>(context);
-
-    return Center(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width * 0.7,
-        child: ListView.builder(
-          itemCount: 14,
-          itemBuilder: (context, index) {
-            final qsn = appState
-                .registeredCourses[appState.selectedCourse].exercise[index];
-            if (qsn.type == 'FW') {
-              return Container(
-                height: MediaQuery.of(context).size.height * 0.4,
-                width: MediaQuery.of(context).size.width * 0.6,
-                child: Card(
-                  child: Column(
-                    children: [
-                      Text((index + 1).toString() + '' + qsn.question),
-                      Container(
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          child: Padding(
-                              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
-                              child: TextField(
-                                maxLines: 8,
-                                onChanged: (val) {},
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                                keyboardType: TextInputType.multiline,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: '',
-                                ),
-                              ))),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.skip_previous),
-                              label: Text("Previous Question"),
-                            ),
-                            Spacer(),
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.flag),
-                              label: Text("Flag Question"),
-                            ),
-                            Spacer(),
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.skip_next),
-                              label: Text("Next Question"),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            } else {
-              return Card(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: Column(
-                    children: [
-                      Text((index + 1).toString() + ' : ' + qsn.question),
-                      Container(
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          child: Wrap(
-                            children: [
-                              new Radio(
-                                value: 0,
-                                groupValue: _radioValue,
-                                onChanged: _handleRadioValueChange,
-                              ),
-                              new Text(
-                                'First Answer',
-                                style: new TextStyle(fontSize: 16.0),
-                              ),
-                              new Radio(
-                                value: 1,
-                                groupValue: _radioValue,
-                                onChanged: _handleRadioValueChange,
-                              ),
-                              new Text(
-                                'Second Answer',
-                                style: new TextStyle(
-                                  fontSize: 16.0,
-                                ),
-                              ),
-                              new Radio(
-                                value: 2,
-                                groupValue: _radioValue,
-                                onChanged: _handleRadioValueChange,
-                              ),
-                              new Text(
-                                'Third Answer',
-                                style: new TextStyle(fontSize: 16.0),
-                              ),
-                              new Radio(
-                                value: 3,
-                                groupValue: _radioValue,
-                                onChanged: _handleRadioValueChange,
-                              ),
-                              new Text(
-                                'Fourth Answer',
-                                style: new TextStyle(fontSize: 16.0),
-                              ),
-                              new Radio(
-                                value: 4,
-                                groupValue: _radioValue,
-                                onChanged: _handleRadioValueChange,
-                              ),
-                              new Text(
-                                'Fifth Answer',
-                                style: new TextStyle(fontSize: 16.0),
-                              ),
-                            ],
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.skip_previous),
-                              label: Text("Previous Question"),
-                            ),
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.flag),
-                              label: Text("Flag Question"),
-                            ),
-                            ElevatedButton.icon(
-                              onPressed: () {},
-                              icon: Icon(Icons.skip_next),
-                              label: Text("Next Question"),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              );
-            }
-          },
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Sample Equations for maths chem physics stats etc'),
         ),
-      ),
-    );
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                        labelText: 'Your LaTeX code here',
+                        helperText:
+                            'Use \$ as delimiter. Use \$\$ for display LaTeX.'),
+                    controller: _laTeXInputController,
+                  ),
+                ),
+                Container(
+                    child: Builder(
+                  builder: (context) => KaTeX(
+                    laTeXCode: Text(_laTeX,
+                        style: Theme.of(context).textTheme.bodyText2),
+                  ),
+                ))
+              ],
+            ),
+          ),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: _renderLaTeX,
+          tooltip: 'Render again. Only working on mobile platform.',
+          label: Text('Render LaTeX'),
+          icon: Icon(Icons.crop_rotate),
+        ));
   }
 
-  void resetSelection() {
-    _handleRadioValueChange1(-1);
-    _handleRadioValueChange2(-1);
-    _handleRadioValueChange3(-1);
-    _handleRadioValueChange4(-1);
-    _handleRadioValueChange5(-1);
-    correctScore = 0;
-  }
-
-  void validateAnswers() {
-    // if (_radioValue1 == -1 && _radioValue2 == -1 &&
-    //     _radioValue3 == -1 && _radioValue4 == -1 &&
-    //     _radioValue5 == -1) {
-    //   Fluttertoast.showToast(msg: 'Please select atleast one answer',
-    //       toastLength: Toast.LENGTH_SHORT);
-    // } else {
-    //   Fluttertoast.showToast(
-    //       msg: 'Your total score is: $correctScore out of 5',
-    //       toastLength: Toast.LENGTH_LONG);
-    // }
+  void _renderLaTeX() {
+    setState(() {
+      _laTeX = _laTeXInputController.text;
+    });
   }
 }
