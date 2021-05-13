@@ -1,6 +1,7 @@
 import 'package:delp/model/appStateModel.dart';
 import 'package:delp/model/courses.dart';
 import 'package:flutter/material.dart';
+import 'package:katex_flutter/katex_flutter.dart';
 import 'package:provider/provider.dart';
 
 class Assignment extends StatefulWidget {
@@ -14,7 +15,6 @@ class _AssignmentState extends State<Assignment> {
   int _radioValue2 = -1;
   int _radioValue3 = -1;
   int _radioValue4 = -1;
-  int _radioValue5 = -1;
   List<Question> flagged = [];
   List<Question> done = [];
 
@@ -47,12 +47,6 @@ class _AssignmentState extends State<Assignment> {
   void _handleRadioValueChange4(int value) {
     setState(() {
       _radioValue4 = value;
-    });
-  }
-
-  void _handleRadioValueChange5(int value) {
-    setState(() {
-      _radioValue5 = value;
     });
   }
 
@@ -242,7 +236,10 @@ class _AssignmentState extends State<Assignment> {
           IconButton(
             icon: Icon(Icons.done),
             onPressed: () {
-              appState.submitted = done;
+              print(done);
+              done.forEach((element) {
+                appState.submitted.add(element);
+              });
               Navigator.pop(context);
             },
             tooltip: 'Submit',
@@ -261,12 +258,19 @@ class _AssignmentState extends State<Assignment> {
                   .assignments[index];
               if (qsn.type == 'FW') {
                 return Container(
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width * 0.6,
                   child: Card(
                     child: Column(
                       children: [
-                        Text((index + 1).toString() + ' : ' + qsn.question),
+                        Container(
+                            child: Builder(
+                          builder: (context) => KaTeX(
+                            laTeXCode: Text(
+                              (index + 1).toString() + ' : ' + qsn.question,
+                            ),
+                          ),
+                        )),
                         Container(
                             width: MediaQuery.of(context).size.width * 0.7,
                             child: Padding(
@@ -274,7 +278,11 @@ class _AssignmentState extends State<Assignment> {
                                 child: TextField(
                                   maxLines: 8,
                                   onChanged: (val) {
-                                    qsn.answerFreeWritten = val;
+                                    appState
+                                        .registeredCourses[
+                                            appState.selectedCourse]
+                                        .assignments[index]
+                                        .answerFreeWritten = val;
                                     done.add(qsn);
                                   },
                                   style: TextStyle(
@@ -282,9 +290,12 @@ class _AssignmentState extends State<Assignment> {
                                   ),
                                   keyboardType: TextInputType.multiline,
                                   decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                    hintText: '',
-                                  ),
+                                      border: OutlineInputBorder(),
+                                      hintText: appState
+                                          .registeredCourses[
+                                              appState.selectedCourse]
+                                          .assignments[index]
+                                          .answerFreeWritten),
                                 ))),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -318,11 +329,18 @@ class _AssignmentState extends State<Assignment> {
               } else {
                 return Card(
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width * 0.6,
                     child: Column(
                       children: [
-                        Text((index + 1).toString() + ' : ' + qsn.question),
+                        Container(
+                            child: Builder(
+                          builder: (context) => KaTeX(
+                            laTeXCode: Text(
+                              (index + 1).toString() + ' : ' + qsn.question,
+                            ),
+                          ),
+                        )),
                         Container(
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width * 0.5,
@@ -339,8 +357,8 @@ class _AssignmentState extends State<Assignment> {
                                 ),
                                 new Radio(
                                   value: 1,
-                                  groupValue: _radioValue,
-                                  onChanged: _handleRadioValueChange,
+                                  groupValue: _radioValue1,
+                                  onChanged: _handleRadioValueChange1,
                                 ),
                                 new Text(
                                   'Second Answer',
@@ -350,8 +368,8 @@ class _AssignmentState extends State<Assignment> {
                                 ),
                                 new Radio(
                                   value: 2,
-                                  groupValue: _radioValue,
-                                  onChanged: _handleRadioValueChange,
+                                  groupValue: _radioValue2,
+                                  onChanged: _handleRadioValueChange2,
                                 ),
                                 new Text(
                                   'Third Answer',
@@ -359,8 +377,8 @@ class _AssignmentState extends State<Assignment> {
                                 ),
                                 new Radio(
                                   value: 3,
-                                  groupValue: _radioValue,
-                                  onChanged: _handleRadioValueChange,
+                                  groupValue: _radioValue3,
+                                  onChanged: _handleRadioValueChange3,
                                 ),
                                 new Text(
                                   'Fourth Answer',
@@ -368,8 +386,8 @@ class _AssignmentState extends State<Assignment> {
                                 ),
                                 new Radio(
                                   value: 4,
-                                  groupValue: _radioValue,
-                                  onChanged: _handleRadioValueChange,
+                                  groupValue: _radioValue4,
+                                  onChanged: _handleRadioValueChange4,
                                 ),
                                 new Text(
                                   'Fifth Answer',
@@ -421,9 +439,15 @@ class _AssignmentState extends State<Assignment> {
     _handleRadioValueChange2(-1);
     _handleRadioValueChange3(-1);
     _handleRadioValueChange4(-1);
-    _handleRadioValueChange5(-1);
+    _handleRadioValueChange(-1);
     correctScore = 0;
   }
 
   void validateAnswers() {}
 }
+//TODO: Get answers for multiple choice qsns (Limit num of Questions on page to 10 and have next and previous buttons to move through) then have separate controllers for each question answers ie textcontroller for freewritten questions and have the separate radio buttons values for the multiple choice questions
+//TODO: Finish Flagged qsns functionality(edit answer and move qsn to done )
+//TODO:filter unanswered qsns
+//TODO: Submit finished
+//TODO: Quit and Save
+//TODO: Editor for longer free written questions eg for essays in  literature languages

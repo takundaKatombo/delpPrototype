@@ -24,6 +24,10 @@ class _CourseState extends State<Course> {
   @override
   Widget build(BuildContext context) {
     var appState = Provider.of<AppState>(context);
+    print(appState.qsnsListAccounts);
+    print(appState.qsnsListEnglish);
+    print(appState.qsnsListMaths);
+    print(appState.qsnsListGeo);
 
     return DefaultTabController(
       initialIndex: appState.tabsInitPosition,
@@ -31,7 +35,6 @@ class _CourseState extends State<Course> {
       child: Scaffold(
           appBar: AppBar(
             iconTheme: IconThemeData(color: Colors.black),
-            backgroundColor: Colors.yellow[50],
 
             // centerTitle: true,
             //leading: Icon(Icons.person_outline),
@@ -95,16 +98,16 @@ class _CourseState extends State<Course> {
           // drawer: Drawer(
           //   elevation: 30,
           //   child: Container(
-          //     color: Colors.yellow[50],
+          //     color: Colors.white,
           //     child: Column(
           //       children: [
           //         ListTile(
           //           tileColor: Colors.black54,
           //           title: Text(
           //             'Home',
-          //             style: TextStyle(color: Colors.yellow[50]),
+          //             style: TextStyle(color: Colors.white),
           //           ),
-          //           trailing: Icon(Icons.home, color: Colors.yellow[50]),
+          //           trailing: Icon(Icons.home, color: Colors.white),
           //           onTap: () {
           //             Navigator.push(
           //               context,
@@ -117,18 +120,18 @@ class _CourseState extends State<Course> {
           //             tileColor: Colors.black54,
           //             title: Text(
           //               'Coursework',
-          //               style: TextStyle(color: Colors.yellow[50]),
+          //               style: TextStyle(color: Colors.white),
           //             ),
           //             trailing:
-          //                 Icon(Icons.assessment, color: Colors.yellow[50])),
+          //                 Icon(Icons.assessment, color: Colors.white)),
           //         ListTile(
           //           tileColor: Colors.black54,
           //           title: Text(
           //             'Calender',
-          //             style: TextStyle(color: Colors.yellow[50]),
+          //             style: TextStyle(color: Colors.white),
           //           ),
           //           trailing:
-          //               Icon(Icons.calendar_today, color: Colors.yellow[50]),
+          //               Icon(Icons.calendar_today, color: Colors.white),
           //         ),
           //         Container(
           //           color: Colors.black54,
@@ -136,17 +139,17 @@ class _CourseState extends State<Course> {
           //             backgroundColor: Colors.black54,
           //             title: Text(
           //               'My Courses',
-          //               style: TextStyle(color: Colors.yellow[50]),
+          //               style: TextStyle(color: Colors.white),
           //             ),
           //             children: [
           //               ListTile(
           //                 tileColor: Colors.black54,
           //                 title: Text(
           //                   'Geography',
-          //                   style: TextStyle(color: Colors.yellow[50]),
+          //                   style: TextStyle(color: Colors.white),
           //                 ),
           //                 trailing:
-          //                     Icon(Icons.view_module, color: Colors.yellow[50]),
+          //                     Icon(Icons.view_module, color: Colors.white),
           //                 onTap: () {
           //                   Navigator.push(
           //                     context,
@@ -158,10 +161,10 @@ class _CourseState extends State<Course> {
           //                 tileColor: Colors.black54,
           //                 title: Text(
           //                   'Maths',
-          //                   style: TextStyle(color: Colors.yellow[50]),
+          //                   style: TextStyle(color: Colors.white),
           //                 ),
           //                 trailing:
-          //                     Icon(Icons.view_module, color: Colors.yellow[50]),
+          //                     Icon(Icons.view_module, color: Colors.white),
           //                 onTap: () {
           //                   Navigator.push(
           //                     context,
@@ -173,10 +176,10 @@ class _CourseState extends State<Course> {
           //                 tileColor: Colors.black54,
           //                 title: Text(
           //                   'English',
-          //                   style: TextStyle(color: Colors.yellow[50]),
+          //                   style: TextStyle(color: Colors.white),
           //                 ),
           //                 trailing:
-          //                     Icon(Icons.view_module, color: Colors.yellow[50]),
+          //                     Icon(Icons.view_module, color: Colors.white),
           //                 onTap: () {
           //                   Navigator.push(
           //                     context,
@@ -188,10 +191,10 @@ class _CourseState extends State<Course> {
           //                 tileColor: Colors.black54,
           //                 title: Text(
           //                   'Accounts',
-          //                   style: TextStyle(color: Colors.yellow[50]),
+          //                   style: TextStyle(color: Colors.white),
           //                 ),
           //                 trailing:
-          //                     Icon(Icons.view_module, color: Colors.yellow[50]),
+          //                     Icon(Icons.view_module, color: Colors.white),
           //                 onTap: () {
           //                   Navigator.push(
           //                     context,
@@ -216,7 +219,7 @@ class _CourseState extends State<Course> {
                     child: Column(
                       children: [
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedNotes == 1,
                             title: Text(
                               'Chapter 1',
@@ -230,7 +233,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedNotes == 2,
                             title: Text(
                               'Chapter 2',
@@ -244,7 +247,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedNotes == 3,
                             title: Text(
                               'Chapter 3',
@@ -258,7 +261,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedNotes == 4,
                             title: Text(
                               'Chapter 4',
@@ -276,19 +279,19 @@ class _CourseState extends State<Course> {
                   ),
                   Divider(),
                   Container(
-                    color: Colors.yellow[50],
+                    color: Colors.white,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: _switchLeftPanelNotes(_selectedNotes),
                   ),
                   // Spacer(),
                   // Divider(),
                   // Container(
-                  //   color: Colors.yellow[50],
+                  //   color: Colors.white,
                   //   width: MediaQuery.of(context).size.width * 0.8,
                   //   child: Column(
                   //     children: [
                   //       ListTile(
-                  //         tileColor: Colors.yellow[50],
+                  //         tileColor: Colors.white,
                   //         onTap: () {
                   //           Navigator.push(
                   //             context,
@@ -299,17 +302,17 @@ class _CourseState extends State<Course> {
                   //       ),
                   //       Divider(),
                   //       ListTile(
-                  //         tileColor: Colors.yellow[50],
+                  //         tileColor: Colors.white,
                   //         title: Text('Assignment 2'),
                   //       ),
                   //       Divider(),
                   //       ListTile(
-                  //         tileColor: Colors.yellow[50],
+                  //         tileColor: Colors.white,
                   //         title: Text('Assignment 3'),
                   //       ),
                   //       Divider(),
                   //       ListTile(
-                  //         tileColor: Colors.yellow[50],
+                  //         tileColor: Colors.white,
                   //         title: Text('Assignment 4'),
                   //       ),
                   //       Divider(),
@@ -331,12 +334,12 @@ class _CourseState extends State<Course> {
                     child: Column(
                       children: [
                         ExpansionTile(
-                          // selectedTileColor: Colors.yellow[50],
+                          // selectedTileColor: Colors.white,
                           // selected: true,
 
                           children: [
                             ListTile(
-                                selectedTileColor: Colors.yellow[50],
+                                selectedTileColor: Colors.white,
                                 selected: _selectedPractiseQsn == 4,
                                 title: Text(
                                   'Chapter 1',
@@ -350,7 +353,7 @@ class _CourseState extends State<Course> {
                                   });
                                 }),
                             ListTile(
-                                selectedTileColor: Colors.yellow[50],
+                                selectedTileColor: Colors.white,
                                 selected: _selectedPractiseQsn == 5,
                                 title: Text(
                                   'Chapter 2',
@@ -364,7 +367,7 @@ class _CourseState extends State<Course> {
                                   });
                                 }),
                             ListTile(
-                                selectedTileColor: Colors.yellow[50],
+                                selectedTileColor: Colors.white,
                                 selected: _selectedPractiseQsn == 6,
                                 title: Text(
                                   'Chapter 3',
@@ -378,7 +381,7 @@ class _CourseState extends State<Course> {
                                   });
                                 }),
                             ListTile(
-                                selectedTileColor: Colors.yellow[50],
+                                selectedTileColor: Colors.white,
                                 selected: _selectedPractiseQsn == 7,
                                 title: Text(
                                   'Chapter 4',
@@ -398,7 +401,7 @@ class _CourseState extends State<Course> {
                           ),
                         ),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedPractiseQsn == 1,
                             title: Text(
                               'Easy',
@@ -412,7 +415,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedPractiseQsn == 2,
                             title: Text(
                               'Tough',
@@ -426,7 +429,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedPractiseQsn == 3,
                             title: Text(
                               'Very Tough',
@@ -444,7 +447,7 @@ class _CourseState extends State<Course> {
                   ),
                   Divider(),
                   Container(
-                    color: Colors.yellow[50],
+                    color: Colors.white,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: _switchLeftPanelPracticeQsn(_selectedPractiseQsn),
                   ),
@@ -458,7 +461,7 @@ class _CourseState extends State<Course> {
                     child: Column(
                       children: [
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedAss == 1,
                             title: Text(
                               'Submission Pending',
@@ -472,7 +475,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedAss == 2,
                             title: Text(
                               'Done',
@@ -486,7 +489,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedAss == 3,
                             title: Text(
                               'Assessed',
@@ -500,7 +503,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedAss == 4,
                             title: Text(
                               'Due',
@@ -519,7 +522,7 @@ class _CourseState extends State<Course> {
                   // Spacer(),
                   Divider(),
                   Container(
-                    color: Colors.yellow[50],
+                    color: Colors.white,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: _switchLeftPanelAss(_selectedAss),
                   ),
@@ -533,7 +536,7 @@ class _CourseState extends State<Course> {
                     child: Column(
                       children: [
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedExercise == 1,
                             title: Text(
                               'Submission Pending',
@@ -547,7 +550,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedExercise == 2,
                             title: Text(
                               'Assessed',
@@ -561,7 +564,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedExercise == 3,
                             title: Text(
                               'Done',
@@ -580,7 +583,7 @@ class _CourseState extends State<Course> {
                   // Spacer(),
                   Divider(),
                   Container(
-                    color: Colors.yellow[50],
+                    color: Colors.white,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: _switchLeftPanelExercise(_selectedExercise),
                   ),
@@ -594,7 +597,7 @@ class _CourseState extends State<Course> {
                     child: Column(
                       children: [
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedExercise == 2,
                             title: Text(
                               'Submission Pending',
@@ -608,7 +611,7 @@ class _CourseState extends State<Course> {
                               });
                             }),
                         ListTile(
-                            selectedTileColor: Colors.yellow[50],
+                            selectedTileColor: Colors.white,
                             selected: _selectedExercise == 4,
                             title: Text(
                               'Done',
@@ -627,7 +630,7 @@ class _CourseState extends State<Course> {
                   // Spacer(),
                   Divider(),
                   Container(
-                    color: Colors.yellow[50],
+                    color: Colors.white,
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: _switchLeftPanelQuiz(_selectedQuiz),
                   ),
@@ -646,7 +649,7 @@ class _CourseState extends State<Course> {
         return Column(
           children: [
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               onTap: () {
                 Navigator.push(
                   context,
@@ -657,17 +660,17 @@ class _CourseState extends State<Course> {
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Assignment 2'),
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Assignment 3'),
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Assignment 4'),
             ),
             Divider(),
@@ -683,7 +686,7 @@ class _CourseState extends State<Course> {
             : Column(
                 children: [
                   ListTile(
-                    tileColor: Colors.yellow[50],
+                    tileColor: Colors.white,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -694,7 +697,7 @@ class _CourseState extends State<Course> {
                   ),
                   Divider(),
                   ListTile(
-                    tileColor: Colors.yellow[50],
+                    tileColor: Colors.white,
                     title: Text('Assignment 2'),
                   ),
                   Divider(),
@@ -769,7 +772,7 @@ class _CourseState extends State<Course> {
       // return Column(
       //   children: [
       //     ListTile(
-      //       tileColor: Colors.yellow[50],
+      //       tileColor: Colors.white,
       //       onTap: () {
       //         Navigator.push(
       //           context,
@@ -780,17 +783,17 @@ class _CourseState extends State<Course> {
       //     ),
       //     Divider(),
       //     ListTile(
-      //       tileColor: Colors.yellow[50],
+      //       tileColor: Colors.white,
       //       title: Text('Chapter 2'),
       //     ),
       //     Divider(),
       //     ListTile(
-      //       tileColor: Colors.yellow[50],
+      //       tileColor: Colors.white,
       //       title: Text('Chapter 3'),
       //     ),
       //     Divider(),
       //     ListTile(
-      //       tileColor: Colors.yellow[50],
+      //       tileColor: Colors.white,
       //       title: Text('Chapter 4'),
       //     ),
       //     Divider(),
@@ -852,28 +855,28 @@ class _CourseState extends State<Course> {
         return Column(
           children: [
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => Exercise()),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Exercise()),
+                );
               },
               title: Text('Exercise 1'),
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Exercise 2'),
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Exercise 3'),
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Exercise 4'),
             ),
             Divider(),
@@ -907,7 +910,7 @@ class _CourseState extends State<Course> {
         return Column(
           children: [
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               onTap: () {
                 Navigator.push(
                   context,
@@ -918,17 +921,17 @@ class _CourseState extends State<Course> {
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Assignment 2'),
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Assignment 3'),
             ),
             Divider(),
             ListTile(
-              tileColor: Colors.yellow[50],
+              tileColor: Colors.white,
               title: Text('Assignment 4'),
             ),
             Divider(),

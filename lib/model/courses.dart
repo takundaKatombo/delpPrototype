@@ -31,7 +31,6 @@ class Question {
   List<Map<String, String>> answersMultipleChoice = [];
   @override
   String toString() {
-    // TODO: implement toString
     print(status);
     print("status");
     print(type);

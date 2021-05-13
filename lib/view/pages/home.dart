@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:delp/controller/loginController.dart';
 import 'package:delp/model/appStateModel.dart';
 import 'package:delp/model/courses.dart';
@@ -5,9 +7,16 @@ import 'package:delp/model/mockData/mockCourses.dart';
 import 'package:delp/model/mockData/mockCourses.dart';
 import 'package:delp/model/mockData/mockQsns.dart';
 import 'package:delp/model/todoModel.dart';
+import 'package:delp/view/pages/assignment.dart';
+import 'package:delp/view/pages/newTodoView.dart';
 import 'package:delp/view/widgets/course_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+//TODO: Do Calender pop up,(persistent storage) check syncfusion calender
+//TODO: Do Notifications pop up,
+//TODO: Do Notifications for new assignments exercise notes etc,
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
@@ -19,38 +28,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var future = LoginController.simulateNetworkCall();
   @override
   Widget build(BuildContext context) {
     var appState = Provider.of<AppState>(context);
 
-    return FutureBuilder(
-        future: future,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: Container(
-                child: CircularProgressIndicator(),
-                height: MediaQuery.of(context).size.height * 0.1,
-                width: MediaQuery.of(context).size.width * 0.05,
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else
-            return Home(widget: widget, appState: appState);
-        });
-  }
-
-  void _showDialog(BuildContext context) {
-    // flutter defined function
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // return object of type Dialog
-        return CircularProgressIndicator();
-      },
-    );
+    return Home(widget: widget, appState: appState);
   }
 }
 
@@ -70,6 +52,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   DateTime _selectedDate;
+  SharedPreferences sharedPreferences;
+  List<Todo> list = [];
+  @override
+  void initState() {
+    loadSharedPreferencesAndData();
+    super.initState();
+  }
+
+  void loadSharedPreferencesAndData() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    loadData();
+  }
 
   void _showDialog(BuildContext context) {
     // flutter defined function
@@ -112,24 +106,35 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (BuildContext context) {
         // return object of type Dialog
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.25,
-          width: MediaQuery.of(context).size.width * 0.175,
-          child: Card(
-            child: Column(
+        return AlertDialog(
+          content: Container(
+            height: MediaQuery.of(context).size.height * 0.25,
+            width: MediaQuery.of(context).size.width * 0.175,
+            child: ListView(
               children: [
                 ListTile(
-                  title: Text('Notification 1'),
-                ),
+                    title: Text('Assignment Due tommorow'),
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, '/assignment');
+                    },
+                    trailing: Icon(
+                      Icons.close,
+                    )),
                 ListTile(
-                  title: Text('Notification 2'),
-                ),
+                    title: Text('Notification 2'),
+                    trailing: Icon(
+                      Icons.close,
+                    )),
                 ListTile(
-                  title: Text('Notification 3'),
-                ),
+                    title: Text('Notification 3'),
+                    trailing: Icon(
+                      Icons.close,
+                    )),
                 ListTile(
-                  title: Text('Notification 4'),
-                ),
+                    title: Text('Notification 4'),
+                    trailing: Icon(
+                      Icons.close,
+                    )),
               ],
             ),
           ),
@@ -144,21 +149,33 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (BuildContext context) {
         // return object of type Dialog
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.25,
-          width: MediaQuery.of(context).size.width * 0.175,
-          child: Card(
+        return AlertDialog(
+          content: Container(
+            height: MediaQuery.of(context).size.height * 0.25,
+            width: MediaQuery.of(context).size.width * 0.175,
             child: Column(
               children: [
                 ListTile(
                   title: Text('Coursework'),
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, '/coursework');
+                  },
                 ),
                 ListTile(
                   title: Text('Settings'),
+                  onTap: () {
+                    Navigator.popAndPushNamed(context, '/settings');
+                  },
                 ),
               ],
             ),
           ),
+          actions: [
+            ElevatedButton.icon(
+                onPressed: () => Navigator.popAndPushNamed(context, '/login'),
+                icon: Icon(Icons.logout),
+                label: Text('Logout'))
+          ],
         );
       },
     );
@@ -166,16 +183,12 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    var todoList = Provider.of<Todo>(context);
-
     return Scaffold(
       //remove one of the scaffolds this and login page
-      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
         automaticallyImplyLeading: false,
         //leading: Icon( color: Colors.black),
         iconTheme: IconThemeData(color: Colors.black),
-        backgroundColor: Colors.yellow[50],
         title: Text(
           widget.widget.title,
           style: TextStyle(color: Colors.black),
@@ -188,9 +201,10 @@ class _HomeState extends State<Home> {
                 Icons.calendar_view_day_rounded,
               ),
               onPressed: () async {
-                final DateTimeRange picked = await showDateRangePicker(
+                final DateTime picked = await showDatePicker(
                     context: context,
-                    firstDate: DateTime(2010),
+                    initialDate: DateTime(2021),
+                    firstDate: DateTime(2020),
                     lastDate: DateTime(2021),
                     builder: (context, child) {
                       return Center(
@@ -202,7 +216,7 @@ class _HomeState extends State<Home> {
                       );
                     });
                 if (picked != null) {
-                  _selectedDate = picked as DateTime;
+                  _selectedDate = picked;
                 }
               }),
           IconButton(
@@ -239,10 +253,7 @@ class _HomeState extends State<Home> {
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.2,
                     height: MediaQuery.of(context).size.height * 0.3,
-                    //color: Colors.black,
                     child: Card(
-                      color: Colors.yellow[50],
-                      shadowColor: Colors.black54,
                       elevation: 0,
                       child: Row(
                         children: [
@@ -250,15 +261,14 @@ class _HomeState extends State<Home> {
                             child: Container(
                               width: MediaQuery.of(context).size.width * 0.15,
                               height: MediaQuery.of(context).size.height * 0.05,
-                              child: RaisedButton(
-                                color: Colors.black,
+                              child: ElevatedButton(
                                 onPressed: () {
                                   _showDialog(context);
                                 },
                                 child: Center(
                                     child: Text(
                                   'Next Lesson on 1 Feb',
-                                  style: TextStyle(color: Colors.yellow[50]),
+                                  style: TextStyle(color: Colors.white),
                                 )),
                               ),
                             ),
@@ -266,19 +276,10 @@ class _HomeState extends State<Home> {
                           Spacer(),
                           Container(
                             //margin: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.circular(8.0),
-                              color: Colors.black,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black54,
-                                  blurRadius: 2.0,
-                                  spreadRadius: 0.0,
-                                  offset: Offset(2.0,
-                                      2.0), // shadow direction: bottom right
-                                )
-                              ],
-                            ),
+                            color: Colors.white,
+
+                            // borderRadius: BorderRadius.circular(8.0),
+
                             //color: Colors.green,
                             width: MediaQuery.of(context).size.width * 0.35 + 1,
                             height: MediaQuery.of(context).size.height * 0.3,
@@ -287,25 +288,15 @@ class _HomeState extends State<Home> {
                                 Container(
                                     height: MediaQuery.of(context).size.height *
                                         0.03,
-                                    // width: MediaQuery.of(context)
-                                    //         .size
-                                    //         .width *
-                                    //     0.175,
                                     child: Center(
-                                        child: Text(
-                                      widget.appState.registeredCourses[index]
-                                          .name,
-                                      style:
-                                          TextStyle(color: Colors.yellow[50]),
-                                    ))),
+                                      child: Text(
+                                        widget.appState.registeredCourses[index]
+                                            .name,
+                                      ),
+                                    )),
                                 Row(
                                   children: [
                                     Container(
-                                      decoration: BoxDecoration(
-                                        color: Colors.yellow[50],
-                                      ),
-
-                                      //color: Colors.amberAccent,
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.25,
@@ -319,8 +310,6 @@ class _HomeState extends State<Home> {
                                               Icons.circle,
                                               color: Colors.green,
                                             ),
-                                            hoverColor: Colors.blue,
-                                            focusColor: Colors.blue,
                                             onTap: () {
                                               widget.appState
                                                   .setTabInitPosition(0);
@@ -368,14 +357,7 @@ class _HomeState extends State<Home> {
                                     ),
                                     //Spacer(),
                                     Container(
-                                      // decoration: BoxDecoration(
-                                      //     //color: Colors.lightBlueAccent,
-                                      //     borderRadius:
-                                      //         BorderRadius.circular(10),
-                                      //     border: Border.all(
-                                      //         color: Colors.blue)),
-
-                                      color: Colors.yellow[50],
+                                      color: Colors.white,
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.25,
@@ -442,51 +424,29 @@ class _HomeState extends State<Home> {
           ),
           Column(
             children: [
-              Consumer<Todo>(
-                builder: (context, value, child) {
-                  return Container(
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    child: Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Stack(
-                        children: [
-                          Card(
-                            elevation: 4,
-                            color: Colors.yellow[50],
-                            child: new ListView.builder(
-                              reverse: true,
-                              itemCount: value.todoList.length,
-                              itemBuilder: (BuildContext ctxt, int index) {
-                                return ListTile(
-                                  title: new Text(
-                                    value.todoList[index],
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.4,
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: Stack(
+                    children: [
+                      Card(
+                          elevation: 4,
+                          child: list.isEmpty ? emptyList() : buildListView()),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: FloatingActionButton(
+                            onPressed: () => goToNewItemView(),
+                            child: Icon(Icons.add),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: FloatingActionButton(
-                                onPressed: () {
-                                  todoList.addTodo(
-                                      "Todo ${todoList.todoList.length + 1}");
-                                },
-                                child: Icon(Icons.add),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
               Container(
                 width: MediaQuery.of(context).size.width * 0.4,
@@ -497,7 +457,6 @@ class _HomeState extends State<Home> {
                     padding: const EdgeInsets.all(18.0),
                     child: Card(
                       elevation: 4,
-                      color: Colors.yellow[50],
                       child: Placeholder(),
                     ),
                   ),
@@ -508,5 +467,113 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  Widget emptyList() {
+    return Center(child: Text('No items'));
+  }
+
+  Widget buildListView() {
+    return ListView.builder(
+      itemCount: list.length,
+      itemBuilder: (BuildContext context, int index) {
+        return buildItem(list[index], index);
+      },
+    );
+  }
+
+  Widget buildItem(Todo item, index) {
+    return Dismissible(
+      key: Key('${item.hashCode}'),
+      background: Container(color: Colors.red[700]),
+      onDismissed: (direction) => removeItem(item),
+      direction: DismissDirection.startToEnd,
+      child: buildListTile(item, index),
+    );
+  }
+
+  Widget buildListTile(Todo item, int index) {
+    print(item.completed);
+    return ListTile(
+      onTap: () => changeItemCompleteness(item),
+      onLongPress: () => goToEditItemView(item),
+      title: Text(
+        item.title,
+        key: Key('item-$index'),
+        style: TextStyle(
+            color: item.completed ? Colors.grey : Colors.black,
+            decoration: item.completed ? TextDecoration.lineThrough : null),
+      ),
+      trailing: Icon(
+        item.completed ? Icons.check_box : Icons.check_box_outline_blank,
+        key: Key('completed-icon-$index'),
+      ),
+    );
+  }
+
+  void goToNewItemView() {
+    // Here we are pushing the new view into the Navigator stack. By using a
+    // MaterialPageRoute we get standard behaviour of a Material app, which will
+    // show a back button automatically for each platform on the left top corner
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return NewTodoView();
+    })).then((title) {
+      if (title != null) {
+        addItem(Todo(title: title));
+      }
+    });
+  }
+
+  void addItem(Todo item) {
+    // Insert an item into the top of our list, on index zero
+    list.insert(0, item);
+    saveData();
+    setState(() {});
+  }
+
+  void changeItemCompleteness(Todo item) {
+    setState(() {
+      item.completed = !item.completed;
+    });
+    saveData();
+  }
+
+  void goToEditItemView(item) {
+    // We re-use the NewTodoView and push it to the Navigator stack just like
+    // before, but now we send the title of the item on the class constructor
+    // and expect a new title to be returned so that we can edit the item
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return NewTodoView(item: item);
+    })).then((title) {
+      if (title != null) {
+        editItem(item, title);
+      }
+    });
+  }
+
+  void editItem(Todo item, String title) {
+    item.title = title;
+    saveData();
+    setState(() {});
+  }
+
+  void removeItem(Todo item) {
+    list.remove(item);
+    saveData();
+    setState(() {});
+  }
+
+  void loadData() {
+    List<String> listString = sharedPreferences.getStringList('list');
+    if (listString != null) {
+      list = listString.map((item) => Todo.fromMap(json.decode(item))).toList();
+      setState(() {});
+    }
+  }
+
+  void saveData() {
+    List<String> stringList =
+        list.map((item) => json.encode(item.toMap())).toList();
+    sharedPreferences.setStringList('list', stringList);
   }
 }

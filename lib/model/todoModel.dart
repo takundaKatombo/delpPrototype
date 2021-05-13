@@ -1,10 +1,20 @@
-import 'package:flutter/foundation.dart';
+class Todo {
+  String title;
+  bool completed;
 
-class Todo extends ChangeNotifier {
-  List<String> todoList = ["Todo 1", "Todo 2"];
+  Todo({
+    this.title,
+    this.completed = false,
+  });
 
-  void addTodo(String todo) {
-    todoList.add(todo);
-    notifyListeners();
+  Todo.fromMap(Map map)
+      : this.title = map['title'],
+        this.completed = map['completed'];
+
+  Map toMap() {
+    return {
+      'title': this.title,
+      'completed': this.completed,
+    };
   }
 }

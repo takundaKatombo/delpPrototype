@@ -10,13 +10,15 @@ void main() {
   runApp(MyApp());
 }
 
+//TODO: get separate assignments, exercise, quiz etc for various courses
+//TODO: Neumorphic design ?
+//TODO: add persistent storage(done for todo list)
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<AppState>(create: (_) => AppState()),
-          ChangeNotifierProvider<Todo>(create: (_) => Todo())
         ],
         builder: (context, snapshot) {
           var appState = Provider.of<AppState>(context);
